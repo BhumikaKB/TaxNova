@@ -1,0 +1,392 @@
+<html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Smart ITR Assistant</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            height:100vh;
+            overflow:hidden;
+            background:
+            linear-gradient(135deg,
+            #0B132B,
+            #1C2541,
+            #2563EB,
+            #14B8A6);
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            position:relative;
+        }
+
+        /* Background Glow Circles */
+
+        .circle{
+            position:absolute;
+            border-radius:50%;
+            filter:blur(80px);
+            opacity:0.5;
+            animation:float 8s infinite ease-in-out;
+        }
+
+        .circle1{
+            width:300px;
+            height:300px;
+            background:#14B8A6;
+            top:-80px;
+            left:-80px;
+        }
+
+        .circle2{
+            width:250px;
+            height:250px;
+            background:#3B82F6;
+            bottom:-60px;
+            right:-60px;
+        }
+
+        .circle3{
+            width:180px;
+            height:180px;
+            background:#FACC15;
+            top:50%;
+            left:65%;
+        }
+
+        @keyframes float{
+            0%{
+                transform:translateY(0px);
+            }
+
+            50%{
+                transform:translateY(20px);
+            }
+
+            100%{
+                transform:translateY(0px);
+            }
+        }
+
+        /* Register Card */
+
+        .register-card{
+
+            width:430px;
+            padding:45px;
+
+            background:rgba(255,255,255,0.10);
+
+            border:1px solid rgba(255,255,255,0.2);
+
+            backdrop-filter:blur(18px);
+
+            border-radius:28px;
+
+            box-shadow:
+            0 8px 32px rgba(0,0,0,0.35);
+
+            color:white;
+
+            position:relative;
+
+            z-index:10;
+
+            animation:fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn{
+
+            from{
+                opacity:0;
+                transform:translateY(40px);
+            }
+
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        .brand{
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+
+            margin-bottom:10px;
+        }
+
+        .brand i{
+            color:#FACC15;
+            font-size:28px;
+        }
+
+        .brand h2{
+            font-weight:700;
+            font-size:28px;
+        }
+
+        .subtitle{
+            text-align:center;
+            font-size:14px;
+            color:#dbeafe;
+            margin-bottom:35px;
+        }
+
+        /* Inputs */
+
+        .input-box{
+            position:relative;
+            margin-bottom:22px;
+        }
+
+        .input-box input{
+
+            width:100%;
+            padding:14px 14px 14px 50px;
+
+            border:none;
+            outline:none;
+
+            border-radius:14px;
+
+            background:rgba(255,255,255,0.12);
+
+            color:white;
+
+            transition:0.3s;
+        }
+
+        .input-box input::placeholder{
+            color:#d1d5db;
+        }
+
+        .input-box input:focus{
+
+            background:rgba(255,255,255,0.18);
+
+            box-shadow:
+            0 0 15px rgba(59,130,246,0.7);
+        }
+
+        .input-box i{
+
+            position:absolute;
+            top:15px;
+            left:18px;
+
+            color:#93c5fd;
+        }
+
+        /* Button */
+
+        .register-btn{
+
+            width:100%;
+            padding:14px;
+
+            border:none;
+            border-radius:14px;
+
+            background:
+            linear-gradient(to right,
+            #14B8A6,
+            #2563EB);
+
+            color:white;
+
+            font-weight:600;
+
+            font-size:16px;
+
+            transition:0.3s;
+        }
+
+        .register-btn:hover{
+
+            transform:translateY(-2px) scale(1.02);
+
+            box-shadow:
+            0 8px 25px rgba(37,99,235,0.5);
+        }
+
+        /* Footer */
+
+        .footer-text{
+            text-align:center;
+            margin-top:22px;
+            font-size:14px;
+            color:#dbeafe;
+        }
+
+        .footer-text a{
+            color:#FACC15;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        .footer-text a:hover{
+            text-decoration:underline;
+        }
+
+        /* Tiny Badge */
+
+        .tax-badge{
+
+            position:absolute;
+            top:20px;
+            right:20px;
+
+            background:rgba(250,204,21,0.2);
+
+            border:1px solid rgba(250,204,21,0.4);
+
+            padding:8px 14px;
+
+            border-radius:50px;
+
+            font-size:12px;
+            color:#FACC15;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Glow Effects -->
+
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+
+    <!-- Register Card -->
+
+    <div class="register-card">
+
+        <div class="tax-badge">
+            Smart Tax AI
+        </div>
+
+        <div class="brand">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <h2>TaxNova</h2>
+        </div>
+
+        <div class="subtitle">
+            Your smart Indian tax filing assistant 🚀
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div style="background: {{ 'rgba(220,53,69,0.15)' if category == 'error' else 'rgba(40,167,69,0.15)' }};
+                                border: 1px solid {{ '#dc3545' if category == 'error' else '#28a745' }};
+                                color: {{ '#ff8a8a' if category == 'error' else '#7ee89b' }};
+                                padding: 10px 14px;
+                                border-radius: 10px;
+                                font-size: 13px;
+                                margin-bottom: 14px;
+                                text-align: center;">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <div class="input-box">
+                <i class="fa-solid fa-user"></i>
+
+                <input type="text"
+			name="name"
+                       placeholder="Full Name"
+                       value="{{ request.form.name or '' }}"
+                       required>
+            </div>
+
+            <div class="input-box">
+                <i class="fa-solid fa-envelope"></i>
+
+                <input type="email"
+			name="email"
+                       placeholder="Email Address"
+                       value="{{ request.form.email or '' }}"
+                       required>
+            </div>
+
+            <div class="input-box">
+                <i class="fa-solid fa-lock"></i>
+
+                <input type="password"
+			name="password"
+                       id="registerPassword"
+                       placeholder="Create Password"
+                       minlength="6"
+                       required>
+
+                <i class="fa-solid fa-eye" id="toggleRegisterPassword"
+                   style="cursor:pointer; opacity:.6;"></i>
+            </div>
+
+            <button type="submit"
+                    class="register-btn">
+
+                Create Account
+            </button>
+
+        </form>
+
+        <div class="footer-text">
+
+            Already have an account?
+
+            <a href="/login">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+<script>
+    const toggleRegisterPassword = document.getElementById('toggleRegisterPassword');
+    const registerPassword = document.getElementById('registerPassword');
+    if (toggleRegisterPassword) {
+        toggleRegisterPassword.addEventListener('click', () => {
+            const isHidden = registerPassword.type === 'password';
+            registerPassword.type = isHidden ? 'text' : 'password';
+            toggleRegisterPassword.classList.toggle('fa-eye');
+            toggleRegisterPassword.classList.toggle('fa-eye-slash');
+        });
+    }
+</script>
+</body>
+
+</html>
+

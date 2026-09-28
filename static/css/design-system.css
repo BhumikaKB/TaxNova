@@ -1,0 +1,493 @@
+/* =========================================================
+   TaxNova Design System
+   One shared token + component layer so every page (auth,
+   dashboard, upload, review, success) feels like one product
+   instead of nine separately-styled pages.
+   ========================================================= */
+
+:root{
+    /* --- Color --- */
+    --bg-base:#0a0e17;
+    --bg-elevated: rgba(255,255,255,0.045);
+    --bg-elevated-hover: rgba(255,255,255,0.075);
+    --border-glass: rgba(255,255,255,0.09);
+
+    --grad-primary: linear-gradient(135deg,#4f7cff 0%,#7c3aed 100%);
+    --grad-gold: linear-gradient(135deg,#f5b942 0%,#f7d774 100%);
+
+    --accent-blue:#4f7cff;
+    --accent-violet:#7c3aed;
+    --accent-gold:#f5b942;
+    --accent-teal:#14b8a6;
+    --accent-danger:#fb7185;
+
+    --text-primary:#f1f5f9;
+    --text-muted:#94a3b8;
+    --text-faint:#5b6579;
+
+    /* --- Type --- */
+    --font-ui:'Poppins',sans-serif;
+    --font-figure:'Space Mono',monospace;
+
+    /* --- Spacing / radius --- */
+    --radius-sm:10px;
+    --radius-md:16px;
+    --radius-lg:24px;
+    --space-1:8px;
+    --space-2:16px;
+    --space-3:24px;
+    --space-4:32px;
+    --space-5:48px;
+
+    --shadow-glass: 0 8px 32px rgba(0,0,0,0.35);
+}
+
+/* ---------- Reset-lite (scoped additions only, doesn't fight existing page styles) ---------- */
+.tn-shell *{ box-sizing:border-box; }
+
+/* ---------- App shell: sidebar + topbar for logged-in pages ---------- */
+.tn-shell{
+    min-height:100vh;
+    display:flex;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(79,124,255,0.14), transparent 40%),
+        radial-gradient(circle at 85% 90%, rgba(124,58,237,0.14), transparent 45%),
+        var(--bg-base);
+    font-family:var(--font-ui);
+    color:var(--text-primary);
+}
+
+.tn-sidebar{
+    width:250px;
+    flex-shrink:0;
+    background:rgba(255,255,255,0.03);
+    border-right:1px solid var(--border-glass);
+    padding:var(--space-3) var(--space-2);
+    display:flex;
+    flex-direction:column;
+    gap:var(--space-4);
+    position:sticky;
+    top:0;
+    height:100vh;
+}
+
+.tn-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:0 8px;
+    font-weight:700;
+    font-size:19px;
+}
+.tn-brand i{
+    background:var(--grad-primary);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    font-size:22px;
+}
+
+.tn-nav{ display:flex; flex-direction:column; gap:4px; }
+.tn-nav a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 14px;
+    border-radius:var(--radius-sm);
+    color:var(--text-muted);
+    text-decoration:none;
+    font-size:14.5px;
+    font-weight:500;
+    transition:all .15s ease;
+}
+.tn-nav a i{ width:18px; text-align:center; font-size:15px; }
+.tn-nav a:hover{ background:var(--bg-elevated-hover); color:var(--text-primary); }
+.tn-nav a.active{
+    background:var(--grad-primary);
+    color:#fff;
+    box-shadow:0 4px 14px rgba(79,124,255,0.35);
+}
+.tn-nav a.disabled{ opacity:.35; pointer-events:none; }
+.tn-nav-label{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--text-faint);
+    padding:0 14px;
+    margin-top:8px;
+}
+
+.tn-sidebar-footer{ margin-top:auto; }
+.tn-logout{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:11px 14px;
+    border-radius:var(--radius-sm);
+    color:var(--accent-danger);
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+    border:1px solid rgba(251,113,133,0.25);
+}
+.tn-logout:hover{ background:rgba(251,113,133,0.1); }
+
+.tn-main{ flex:1; padding:var(--space-4) var(--space-5); max-width:1200px; }
+
+.tn-topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:var(--space-4);
+    flex-wrap:wrap;
+    gap:var(--space-2);
+}
+.tn-breadcrumb{ font-size:13px; color:var(--text-faint); }
+.tn-breadcrumb .current{ color:var(--text-muted); }
+
+/* ---------- Cards ---------- */
+.tn-card{
+    background:var(--bg-elevated);
+    border:1px solid var(--border-glass);
+    border-radius:var(--radius-lg);
+    backdrop-filter:blur(20px);
+    box-shadow:var(--shadow-glass);
+    padding:var(--space-3);
+}
+
+/* ---------- Buttons ---------- */
+.tn-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:13px 26px;
+    border-radius:var(--radius-sm);
+    font-family:var(--font-ui);
+    font-weight:600;
+    font-size:14.5px;
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    transition:transform .12s ease, box-shadow .12s ease;
+}
+.tn-btn:active{ transform:scale(.97); }
+.tn-btn-primary{
+    background:var(--grad-primary);
+    color:#fff;
+    box-shadow:0 6px 18px rgba(79,124,255,0.35);
+}
+.tn-btn-primary:hover{ box-shadow:0 8px 24px rgba(79,124,255,0.5); }
+.tn-btn-gold{
+    background:var(--grad-gold);
+    color:#1a1300;
+    box-shadow:0 6px 18px rgba(245,185,66,0.35);
+}
+.tn-btn-ghost{
+    background:transparent;
+    border:1px solid var(--border-glass);
+    color:var(--text-primary);
+}
+.tn-btn-ghost:hover{ background:var(--bg-elevated-hover); }
+.tn-btn[disabled]{ opacity:.4; cursor:not-allowed; }
+
+/* ---------- Workflow stepper ---------- */
+.tn-stepper{
+    display:flex;
+    align-items:center;
+    margin-bottom:var(--space-4);
+    flex-wrap:wrap;
+    gap:0;
+}
+.tn-step{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--text-faint);
+    font-size:13px;
+    font-weight:500;
+}
+.tn-step .dot{
+    width:26px; height:26px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px;
+    border:1.5px solid var(--text-faint);
+    color:var(--text-faint);
+    flex-shrink:0;
+}
+.tn-step.done .dot{ background:var(--accent-teal); border-color:var(--accent-teal); color:#04211c; }
+.tn-step.active .dot{ background:var(--grad-primary); border-color:transparent; color:#fff; }
+.tn-step.done, .tn-step.active{ color:var(--text-primary); }
+.tn-step-line{
+    width:36px; height:1.5px;
+    background:var(--text-faint);
+    margin:0 8px;
+    opacity:.4;
+}
+.tn-step.done + .tn-step-line{ background:var(--accent-teal); opacity:.6; }
+
+/* ---------- Regime Scale (signature comparison motif) ---------- */
+.tn-scale{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:var(--space-3);
+    margin:var(--space-3) 0;
+}
+.tn-scale-panel{
+    border-radius:var(--radius-md);
+    padding:var(--space-3);
+    border:1px solid var(--border-glass);
+    background:var(--bg-elevated);
+    text-align:center;
+    transition:all .2s ease;
+}
+.tn-scale-panel.winner{
+    border-color:var(--accent-gold);
+    background:rgba(245,185,66,0.08);
+    box-shadow:0 0 0 1px rgba(245,185,66,0.3), 0 8px 30px rgba(245,185,66,0.15);
+}
+.tn-scale-panel .label{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--text-muted);
+    margin-bottom:6px;
+}
+.tn-scale-panel .amount{
+    font-family:var(--font-figure);
+    font-size:28px;
+    font-weight:700;
+}
+.tn-scale-panel.winner .amount{ color:var(--accent-gold); }
+.tn-scale-badge{
+    background:var(--accent-gold);
+    color:#1a1300;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.05em;
+    padding:3px 9px;
+    border-radius:20px;
+    margin-top:8px;
+    display:inline-block;
+}
+.tn-scale-vs{
+    font-family:var(--font-figure);
+    color:var(--text-faint);
+    font-size:13px;
+}
+
+/* ---------- Stat cards ---------- */
+.tn-stat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:var(--space-2);
+    margin-bottom:var(--space-4);
+}
+.tn-stat{
+    background:var(--bg-elevated);
+    border:1px solid var(--border-glass);
+    border-radius:var(--radius-md);
+    padding:var(--space-2) var(--space-3);
+}
+.tn-stat .label{ font-size:12.5px; color:var(--text-muted); margin-bottom:6px; }
+.tn-stat .value{ font-family:var(--font-figure); font-size:24px; font-weight:700; }
+
+/* ---------- Figures ---------- */
+.tn-figure{ font-family:var(--font-figure); }
+
+/* ---------- Alerts ---------- */
+.tn-alert{
+    padding:12px 16px;
+    border-radius:var(--radius-sm);
+    font-size:13.5px;
+    margin-bottom:var(--space-2);
+    border:1px solid transparent;
+}
+.tn-alert-error{ background:rgba(251,113,133,0.12); border-color:rgba(251,113,133,0.4); color:#ffb4bf; }
+.tn-alert-success{ background:rgba(20,184,166,0.12); border-color:rgba(20,184,166,0.4); color:#7ee8d3; }
+
+/* ---------- Dropzone ---------- */
+.tn-dropzone{
+    border:1.5px dashed var(--border-glass);
+    border-radius:var(--radius-lg);
+    padding:var(--space-5) var(--space-3);
+    text-align:center;
+    cursor:pointer;
+    transition:all .15s ease;
+    background:var(--bg-elevated);
+}
+.tn-dropzone:hover, .tn-dropzone.dragover{
+    border-color:var(--accent-blue);
+    background:rgba(79,124,255,0.06);
+}
+.tn-dropzone i{ font-size:36px; color:var(--accent-blue); margin-bottom:12px; }
+.tn-dropzone .hint{ font-size:12.5px; color:var(--text-faint); margin-top:6px; }
+.tn-file-chip{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--bg-elevated-hover);
+    border:1px solid var(--border-glass);
+    border-radius:var(--radius-sm);
+    padding:10px 16px;
+    font-size:13.5px;
+    margin-top:var(--space-2);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 880px){
+    .tn-shell{ flex-direction:column; }
+    .tn-sidebar{
+        width:100%; height:auto; position:relative;
+        flex-direction:row; align-items:center; overflow-x:auto;
+    }
+    .tn-nav{ flex-direction:row; }
+    .tn-nav-label{ display:none; }
+    .tn-sidebar-footer{ margin-top:0; margin-left:auto; }
+    .tn-main{ padding:var(--space-3); }
+    .tn-scale{ grid-template-columns:1fr; }
+}
+
+/* ---------- Accessibility: visible focus ---------- */
+.tn-btn:focus-visible, .tn-nav a:focus-visible, input:focus-visible{
+    outline:2px solid var(--accent-blue);
+    outline-offset:2px;
+}
+@media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+}
+
+/* =========================================================
+   Motion layer
+   Every animation here ties to something real happening -
+   content arriving, a choice being made, a task completing -
+   not motion for its own sake.
+   ========================================================= */
+
+@keyframes tn-fade-up{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+@keyframes tn-fade-in{
+    from{ opacity:0; } to{ opacity:1; }
+}
+@keyframes tn-scale-in{
+    from{ opacity:0; transform:scale(.94); }
+    to{ opacity:1; transform:scale(1); }
+}
+@keyframes tn-pulse-ring{
+    0%{ box-shadow:0 0 0 0 rgba(79,124,255,0.35); }
+    70%{ box-shadow:0 0 0 12px rgba(79,124,255,0); }
+    100%{ box-shadow:0 0 0 0 rgba(79,124,255,0); }
+}
+@keyframes tn-blob-drift{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    33%{ transform:translate(20px,-25px) scale(1.06); }
+    66%{ transform:translate(-15px,15px) scale(0.97); }
+}
+@keyframes tn-check-pop{
+    0%{ transform:scale(0) rotate(-20deg); opacity:0; }
+    60%{ transform:scale(1.15) rotate(4deg); opacity:1; }
+    100%{ transform:scale(1) rotate(0); }
+}
+@keyframes tn-confetti-fall{
+    0%{ transform:translateY(-20px) rotate(0deg); opacity:1; }
+    100%{ transform:translateY(320px) rotate(540deg); opacity:0; }
+}
+@keyframes tn-shimmer{
+    0%{ background-position:-200px 0; }
+    100%{ background-position:200px 0; }
+}
+@keyframes tn-glow-pulse{
+    0%,100%{ box-shadow:0 0 0 1px rgba(245,185,66,0.3), 0 8px 30px rgba(245,185,66,0.15); }
+    50%{ box-shadow:0 0 0 1px rgba(245,185,66,0.5), 0 8px 40px rgba(245,185,66,0.3); }
+}
+
+/* Entrance choreography - staggered via nth-child so a page full of
+   cards arrives as a sequence, not a flat flash */
+.tn-animate-in{ animation:tn-fade-up .5s cubic-bezier(.2,.8,.2,1) both; }
+.tn-main > *{ animation:tn-fade-up .45s cubic-bezier(.2,.8,.2,1) both; }
+.tn-main > *:nth-child(1){ animation-delay:0s; }
+.tn-main > *:nth-child(2){ animation-delay:.06s; }
+.tn-main > *:nth-child(3){ animation-delay:.12s; }
+.tn-main > *:nth-child(4){ animation-delay:.18s; }
+.tn-main > *:nth-child(5){ animation-delay:.24s; }
+
+.tn-stat{ transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.tn-stat:hover{ transform:translateY(-3px); border-color:rgba(79,124,255,0.35); box-shadow:0 10px 28px rgba(0,0,0,0.3); }
+
+.tn-card{ transition:box-shadow .25s ease; }
+
+.tn-nav a{ position:relative; overflow:hidden; }
+.tn-nav a.active{ animation:tn-scale-in .3s ease; }
+
+.tn-scale-panel{ animation:tn-fade-up .5s cubic-bezier(.2,.8,.2,1) both; }
+.tn-scale-panel:nth-child(1){ animation-delay:.05s; }
+.tn-scale-panel:nth-child(3){ animation-delay:.2s; }
+.tn-scale-panel.winner{ animation:tn-fade-up .5s cubic-bezier(.2,.8,.2,1) both, tn-glow-pulse 2.4s ease-in-out .6s infinite; }
+.tn-scale-badge{ animation:tn-check-pop .5s cubic-bezier(.34,1.56,.64,1) .4s both; }
+
+.tn-step .dot{ transition:all .35s cubic-bezier(.34,1.56,.64,1); }
+.tn-step.done .dot, .tn-step.active .dot{ animation:tn-scale-in .35s cubic-bezier(.34,1.56,.64,1); }
+.tn-step-line{ position:relative; overflow:hidden; transition:background .5s ease; }
+
+.tn-dropzone{ transition:all .2s ease; }
+.tn-dropzone:hover{ transform:translateY(-2px); }
+.tn-dropzone.dragover{ animation:tn-pulse-ring 1.4s ease-out infinite; transform:scale(1.01); }
+.tn-file-chip{ animation:tn-scale-in .3s cubic-bezier(.34,1.56,.64,1); }
+
+.tn-btn{ position:relative; }
+.tn-btn-primary:hover, .tn-btn-gold:hover{ transform:translateY(-1px); }
+
+/* Confetti burst - small absolutely-positioned pieces, spawned by JS
+   only on the success page at the moment a result is confirmed */
+.tn-confetti-piece{
+    position:fixed;
+    top:-20px;
+    width:8px; height:8px;
+    border-radius:2px;
+    pointer-events:none;
+    z-index:999;
+    animation:tn-confetti-fall linear forwards;
+}
+
+/* Number count-up target - JS animates the displayed digits; this
+   just guarantees no layout jump while it does */
+.tn-count-target{ font-variant-numeric:tabular-nums; }
+
+/* Skeleton loading shimmer, for anything that loads async later */
+.tn-skeleton{
+    background:linear-gradient(90deg, var(--bg-elevated) 25%, var(--bg-elevated-hover) 50%, var(--bg-elevated) 75%);
+    background-size:400px 100%;
+    animation:tn-shimmer 1.4s ease-in-out infinite;
+    border-radius:8px;
+}
+
+/* =========================================================
+   Icon-font failure safeguard
+   If Font Awesome's CDN is blocked, slow, or stripped by an
+   ad-blocker/antivirus web-shield, browsers render the
+   fallback ".notdef" glyph for fa-* icons - which can appear
+   as a large, layout-breaking black box instead of quietly
+   just not showing an icon. This caps every icon to a sane
+   size no matter what, so a font-load failure degrades
+   gracefully instead of visually breaking the page.
+   ========================================================= */
+[class*="fa-"]{
+    display:inline-block;
+    max-width:1.4em;
+    max-height:1.4em;
+    overflow:hidden;
+    vertical-align:middle;
+    line-height:1;
+}
+
+/* Local fallback font stack: if Poppins/Space Mono fail to
+   load from Google Fonts, fall back to clean system fonts
+   instead of the browser default serif. */
+body, .tn-shell{
+    font-family:'Poppins', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+.tn-figure{
+    font-family:'Space Mono', 'Consolas', 'Courier New', monospace;
+}

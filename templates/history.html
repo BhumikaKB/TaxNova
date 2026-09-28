@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History | TaxNova</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/design-system.css', v=ASSET_VERSION) }}">
+</head>
+<body style="margin:0;">
+
+<div class="tn-shell">
+
+    {% set active = 'history' %}
+    {% include '_sidebar.html' %}
+
+    <main class="tn-main">
+
+        <div class="tn-breadcrumb" style="margin-bottom:6px;">TaxNova / <span class="current">History</span></div>
+        <h1 style="margin:0 0 6px; font-size:24px;">Your calculation history</h1>
+        <p style="color:var(--text-muted); font-size:14px; margin:0 0 24px;">
+            Every Form 16 you've processed, most recent first.
+        </p>
+
+        {% if calculations %}
+        <div class="tn-card" style="padding:0; overflow:hidden;">
+            <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+                <thead>
+                    <tr style="text-align:left; border-bottom:1px solid var(--border-glass);">
+                        <th style="padding:14px 16px; color:var(--text-muted); font-weight:500;">Date</th>
+                        <th style="padding:14px 16px; color:var(--text-muted); font-weight:500;">Employer</th>
+                        <th style="padding:14px 16px; color:var(--text-muted); font-weight:500;">Salary</th>
+                        <th style="padding:14px 16px; color:var(--text-muted); font-weight:500;">Regime</th>
+                        <th style="padding:14px 16px; color:var(--text-muted); font-weight:500;">Tax Payable</th>
+                        <th style="padding:14px 16px; color:var(--text-muted); font-weight:500;">Savings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in calculations %}
+                    <tr style="border-bottom:1px solid var(--border-glass);">
+                        <td style="padding:14px 16px; color:var(--text-faint);">{{ c.created_at }}</td>
+                        <td style="padding:14px 16px;">{{ c.employer or '—' }}</td>
+                        <td style="padding:14px 16px; font-family:var(--font-figure);">₹{{ c.salary }}</td>
+                        <td style="padding:14px 16px;">
+                            <span style="background:{{ 'rgba(245,185,66,0.12)' }}; color:var(--accent-gold); padding:3px 10px; border-radius:20px; font-size:12px;">
+                                {{ c.best_regime }}
+                            </span>
+                        </td>
+                        <td style="padding:14px 16px; font-family:var(--font-figure);">
+                            ₹{{ c.old_tax if c.best_regime == 'Old Regime' else c.new_tax }}
+                        </td>
+                        <td style="padding:14px 16px; font-family:var(--font-figure); color:var(--accent-teal);">₹{{ c.savings }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="tn-card" style="text-align:center; padding:var(--space-5) var(--space-3);">
+            <i class="fa-solid fa-clock-rotate-left" style="font-size:34px; color:var(--text-faint); margin-bottom:14px; display:inline-block;"></i>
+            <h3 style="margin:0 0 8px;">No calculations yet</h3>
+            <p style="color:var(--text-muted); font-size:14px; margin:0 auto 20px; max-width:380px;">
+                Once you upload a Form 16 and confirm a result, it'll show up here.
+            </p>
+            <a href="{{ url_for('upload') }}" class="tn-btn tn-btn-primary">
+                <i class="fa-solid fa-file-arrow-up"></i> Upload your first Form 16
+            </a>
+        </div>
+        {% endif %}
+
+    </main>
+
+</div>
+
+</body>
+</html>

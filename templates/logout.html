@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Logout | TaxNova</title>
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Google Font -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+
+            height:100vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            overflow:hidden;
+
+            background:
+            linear-gradient(
+            135deg,
+            #020617,
+            #0f172a,
+            #1d4ed8,
+            #14b8a6);
+
+            position:relative;
+        }
+
+        /* Glow Background */
+
+        .circle{
+
+            position:absolute;
+
+            border-radius:50%;
+
+            filter:blur(90px);
+
+            opacity:0.5;
+
+            animation:float 8s infinite ease-in-out;
+        }
+
+        .circle1{
+            width:300px;
+            height:300px;
+            background:#14b8a6;
+            top:-70px;
+            left:-60px;
+        }
+
+        .circle2{
+            width:250px;
+            height:250px;
+            background:#3b82f6;
+            bottom:-60px;
+            right:-60px;
+        }
+
+        .circle3{
+            width:180px;
+            height:180px;
+            background:#facc15;
+            top:50%;
+            left:70%;
+        }
+
+        @keyframes float{
+
+            0%{
+                transform:translateY(0px);
+            }
+
+            50%{
+                transform:translateY(20px);
+            }
+
+            100%{
+                transform:translateY(0px);
+            }
+        }
+
+        /* Logout Card */
+
+        .logout-card{
+
+            width:420px;
+
+            padding:50px;
+
+            border-radius:30px;
+
+            background:rgba(255,255,255,0.10);
+
+            border:1px solid rgba(255,255,255,0.15);
+
+            backdrop-filter:blur(20px);
+
+            color:white;
+
+            text-align:center;
+
+            box-shadow:
+            0 8px 35px rgba(0,0,0,0.35);
+
+            z-index:10;
+
+            animation:fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn{
+
+            from{
+                opacity:0;
+                transform:translateY(40px);
+            }
+
+            to{
+                opacity:1;
+                transform:translateY(0px);
+            }
+        }
+
+        /* Logout Icon */
+
+        .logout-icon{
+
+            width:90px;
+            height:90px;
+
+            background:
+            linear-gradient(
+            to right,
+            #14b8a6,
+            #2563eb);
+
+            border-radius:50%;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            margin:auto;
+
+            margin-bottom:25px;
+
+            box-shadow:
+            0 8px 25px rgba(37,99,235,0.5);
+        }
+
+        .logout-icon i{
+
+            font-size:38px;
+
+            color:white;
+        }
+
+        /* Heading */
+
+        h1{
+
+            font-size:32px;
+
+            font-weight:700;
+
+            margin-bottom:12px;
+        }
+
+        /* Text */
+
+        p{
+
+            color:#dbeafe;
+
+            margin-bottom:30px;
+
+            font-size:15px;
+        }
+
+        /* Button */
+
+        .login-again{
+
+            display:inline-block;
+
+            padding:14px 28px;
+
+            border-radius:14px;
+
+            background:
+            linear-gradient(
+            to right,
+            #14b8a6,
+            #2563eb);
+
+            color:white;
+
+            text-decoration:none;
+
+            font-weight:600;
+
+            transition:0.3s;
+        }
+
+        .login-again:hover{
+
+            transform:translateY(-2px) scale(1.03);
+
+            box-shadow:
+            0 8px 25px rgba(37,99,235,0.5);
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Background -->
+
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+
+    <!-- Logout Card -->
+
+    <div class="logout-card">
+
+        <div class="logout-icon">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+        </div>
+
+        <h1>Logged Out 👋</h1>
+
+        <p>
+
+            You have successfully logged out from TaxNova.
+
+        </p>
+
+        <a href="/login"
+           class="login-again">
+
+            Login Again
+
+        </a>
+
+    </div>
+
+</body>
+
+</html>

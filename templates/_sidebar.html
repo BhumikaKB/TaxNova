@@ -1,0 +1,34 @@
+<aside class="tn-sidebar">
+
+    <div class="tn-brand">
+        <i class="fa-solid fa-file-invoice-dollar"></i>
+        <span>TaxNova</span>
+    </div>
+
+    <nav class="tn-nav">
+        <a href="{{ url_for('dashboard') }}" class="{{ 'active' if active == 'dashboard' else '' }}">
+            <i class="fa-solid fa-grip"></i> Dashboard
+        </a>
+        <a href="{{ url_for('upload') }}" class="{{ 'active' if active == 'upload' else '' }}">
+            <i class="fa-solid fa-file-arrow-up"></i> Upload Form 16
+        </a>
+        <a href="{{ url_for('history') }}" class="{{ 'active' if active == 'history' else '' }}">
+            <i class="fa-solid fa-clock-rotate-left"></i> History
+        </a>
+
+        <div class="tn-nav-label">Coming soon</div>
+        <a href="#" class="disabled" title="Coming soon">
+            <i class="fa-solid fa-comments"></i> AI Tax Chat
+        </a>
+        <a href="#" class="disabled" title="Coming soon">
+            <i class="fa-solid fa-user"></i> Profile
+        </a>
+    </nav>
+
+    <div class="tn-sidebar-footer">
+        <a href="{{ url_for('logout') }}" class="tn-logout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log out
+        </a>
+    </div>
+
+</aside>

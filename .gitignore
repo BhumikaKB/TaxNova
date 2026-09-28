@@ -1,0 +1,21 @@
+# Environment / secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Database - contains real user data, never commit
+database/database.db
+
+# Uploaded Form 16s - contain real PII (PAN, salary, address), never commit
+uploads/*.pdf
+!uploads/.gitkeep
+
+# Logs
+logs/
+
+# OS / editor cruft
+.DS_Store
+.vscode/

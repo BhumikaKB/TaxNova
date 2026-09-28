@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxNova — Understand Your Tax, Not Just Pay It</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/design-system.css', v=ASSET_VERSION) }}">
+
+    <style>
+        *{ box-sizing:border-box; }
+        body{
+            margin:0;
+            font-family:'Poppins',sans-serif;
+            color:var(--text-primary);
+            background:
+                radial-gradient(circle at 20% 20%, rgba(79,124,255,0.18), transparent 45%),
+                radial-gradient(circle at 80% 75%, rgba(124,58,237,0.16), transparent 45%),
+                var(--bg-base);
+            min-height:100vh;
+        }
+        .nav{
+            display:flex; justify-content:space-between; align-items:center;
+            padding:24px 6vw;
+        }
+        .nav .brand{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:20px; }
+        .nav .brand i{ background:var(--grad-primary); -webkit-background-clip:text; background-clip:text; color:transparent; font-size:22px; }
+        .nav a{
+            color:var(--text-primary); text-decoration:none; font-size:14px; font-weight:500;
+            padding:10px 20px; border-radius:10px; border:1px solid var(--border-glass); margin-left:10px;
+        }
+        .nav a.cta{ background:var(--grad-primary); border:none; }
+
+        .hero{
+            max-width:720px; margin:8vh auto 0; text-align:center; padding:0 24px;
+            position:relative; z-index:1;
+        }
+        .bg-blob{
+            position:fixed;
+            width:420px; height:420px;
+            border-radius:50%;
+            filter:blur(90px);
+            opacity:.35;
+            z-index:0;
+            animation:tn-blob-drift 14s ease-in-out infinite;
+            pointer-events:none;
+        }
+        .bg-blob.b1{ top:-100px; left:-100px; background:var(--accent-blue); }
+        .bg-blob.b2{ bottom:-120px; right:-100px; background:var(--accent-violet); animation-delay:-6s; }
+        .hero .eyebrow{
+            display:inline-flex; align-items:center; gap:8px;
+            font-size:12.5px; color:var(--accent-gold);
+            border:1px solid rgba(245,185,66,0.35); background:rgba(245,185,66,0.08);
+            padding:6px 14px; border-radius:20px; margin-bottom:22px;
+        }
+        .hero h1{
+            font-size:44px; font-weight:800; line-height:1.15; margin:0 0 18px;
+            letter-spacing:-0.01em;
+        }
+        .hero h1 span{
+            background:var(--grad-primary); -webkit-background-clip:text; background-clip:text; color:transparent;
+        }
+        .hero p{ color:var(--text-muted); font-size:16px; line-height:1.6; margin:0 auto 34px; max-width:520px; }
+        .hero-ctas{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+        /* Signature element: the regime scale, front and center on the landing page */
+        .demo-scale{ max-width:520px; margin:64px auto 0; padding:0 24px; position:relative; z-index:1; }
+        .demo-scale .tn-scale{ margin:0; }
+
+        .strip{
+            display:flex; justify-content:center; gap:48px; flex-wrap:wrap;
+            margin:70px auto 0; padding:28px 24px; color:var(--text-faint); font-size:13px;
+            position:relative; z-index:1;
+        }
+        .strip div{ display:flex; align-items:center; gap:8px; }
+        .strip i{ color:var(--accent-teal); }
+
+        footer{ text-align:center; color:var(--text-faint); font-size:12px; padding:40px 0 24px; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blob b1"></div>
+    <div class="bg-blob b2"></div>
+
+    <nav class="nav" style="position:relative; z-index:1;">
+        <div class="brand"><i class="fa-solid fa-file-invoice-dollar"></i> TaxNova</div>
+        <div>
+            <a href="{{ url_for('login') }}">Log in</a>
+            <a href="{{ url_for('register') }}" class="cta">Get started</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="eyebrow tn-animate-in" style="animation-delay:.05s;"><i class="fa-solid fa-sparkles"></i> Built for first-time filers</div>
+        <h1 class="tn-animate-in" style="animation-delay:.15s;">Stop guessing which tax <span>regime</span> saves you more.</h1>
+        <p class="tn-animate-in" style="animation-delay:.25s;">
+            Upload your Form 16. TaxNova reads it, runs both the Old and New
+            regime, and tells you exactly which one to pick — and why —
+            in plain language.
+        </p>
+        <div class="hero-ctas tn-animate-in" style="animation-delay:.35s;">
+            <a href="{{ url_for('register') }}" class="tn-btn tn-btn-primary">
+                <i class="fa-solid fa-file-arrow-up"></i> Upload your Form 16
+            </a>
+            <a href="{{ url_for('login') }}" class="tn-btn tn-btn-ghost">
+                I already have an account
+            </a>
+        </div>
+    </section>
+
+    <div class="demo-scale">
+        <div class="tn-scale">
+            <div class="tn-scale-panel">
+                <div class="label">Old Regime</div>
+                <div class="amount">₹1,12,500</div>
+            </div>
+            <div class="tn-scale-vs">VS</div>
+            <div class="tn-scale-panel winner">
+                <div class="label">New Regime</div>
+                <div class="amount">₹75,000</div>
+                <div class="tn-scale-badge">BETTER CHOICE</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="strip">
+        <div><i class="fa-solid fa-shield-halved"></i> Your Form 16 stays private</div>
+        <div><i class="fa-solid fa-bolt"></i> Results in under a minute</div>
+        <div><i class="fa-solid fa-circle-check"></i> No tax jargon, plain answers</div>
+    </div>
+
+    <footer>© 2026 TaxNova. A student-built tax assistant, not a substitute for a CA's advice.</footer>
+
+</body>
+</html>

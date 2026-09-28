@@ -1,0 +1,23 @@
+{# Usage: {% include '_stepper.html' %} with `step` set to 1-4 in the parent template #}
+<div class="tn-stepper">
+
+    <div class="tn-step {{ 'done' if step > 1 else ('active' if step == 1 else '') }}">
+        <div class="dot">{{ '✓' if step > 1 else '1' }}</div> Upload
+    </div>
+    <div class="tn-step-line"></div>
+
+    <div class="tn-step {{ 'done' if step > 2 else ('active' if step == 2 else '') }}">
+        <div class="dot">{{ '✓' if step > 2 else '2' }}</div> Extract
+    </div>
+    <div class="tn-step-line"></div>
+
+    <div class="tn-step {{ 'done' if step > 3 else ('active' if step == 3 else '') }}">
+        <div class="dot">{{ '✓' if step > 3 else '3' }}</div> Review
+    </div>
+    <div class="tn-step-line"></div>
+
+    <div class="tn-step {{ 'active' if step == 4 else '' }}">
+        <div class="dot">4</div> Compare &amp; Save
+    </div>
+
+</div>

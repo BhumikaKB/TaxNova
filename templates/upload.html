@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Form 16 | TaxNova</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/design-system.css', v=ASSET_VERSION) }}">
+</head>
+<body style="margin:0;">
+
+<div class="tn-shell">
+
+    {% set active = 'upload' %}
+    {% include '_sidebar.html' %}
+
+    <main class="tn-main" style="max-width:760px;">
+
+        <div class="tn-breadcrumb" style="margin-bottom:6px;">TaxNova / <span class="current">Upload Form 16</span></div>
+        <h1 style="margin:0 0 20px; font-size:24px;">Upload your Form 16</h1>
+
+        {% set step = 1 %}
+        {% include '_stepper.html' %}
+
+        <div class="tn-card">
+
+            <form method="POST" enctype="multipart/form-data" id="uploadForm">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <label class="tn-dropzone" id="dropzone" for="pdf_file">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <div id="dropzoneText">
+                        <strong>Click to choose a file</strong> or drag and drop it here
+                    </div>
+                    <div class="hint">PDF only, up to 5 MB. Your Form 16 stays private to your account.</div>
+                    <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf" required style="display:none;">
+                </label>
+
+                <div id="fileChip" style="display:none;">
+                    <span class="tn-file-chip">
+                        <i class="fa-solid fa-file-pdf" style="color:#fb7185;"></i>
+                        <span id="fileName"></span>
+                        <i class="fa-solid fa-xmark" id="removeFile" style="cursor:pointer; color:var(--text-muted);"></i>
+                    </span>
+                </div>
+
+                <button type="submit" class="tn-btn tn-btn-primary" id="submitBtn" style="width:100%; margin-top:var(--space-3);" disabled>
+                    <i class="fa-solid fa-magnifying-glass-chart"></i> Extract &amp; Continue
+                </button>
+
+            </form>
+
+        </div>
+
+        <p style="color:var(--text-faint); font-size:12.5px; margin-top:16px;">
+            <i class="fa-solid fa-shield-halved"></i>
+            Only you can see this file. It's used once, to extract your salary, TDS, and employer details.
+        </p>
+
+        <p style="text-align:center; margin-top:24px; font-size:13px;">
+            <a href="{{ url_for('manual_entry') }}" style="color:var(--text-muted);">
+                Don't have a Form 16 handy? Enter your details manually →
+            </a>
+        </p>
+
+    </main>
+
+</div>
+
+<script>
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('pdf_file');
+    const fileChip = document.getElementById('fileChip');
+    const fileName = document.getElementById('fileName');
+    const submitBtn = document.getElementById('submitBtn');
+    const removeFile = document.getElementById('removeFile');
+    const form = document.getElementById('uploadForm');
+
+    function showFile(file){
+        fileName.textContent = file.name + ' (' + (file.size/1024/1024).toFixed(2) + ' MB)';
+        fileChip.style.display = 'block';
+        submitBtn.disabled = false;
+    }
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length) showFile(fileInput.files[0]);
+    });
+
+    ['dragover','dragenter'].forEach(evt =>
+        dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.add('dragover'); })
+    );
+    ['dragleave','drop'].forEach(evt =>
+        dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.remove('dragover'); })
+    );
+    dropzone.addEventListener('drop', e => {
+        if (e.dataTransfer.files.length){
+            fileInput.files = e.dataTransfer.files;
+            showFile(e.dataTransfer.files[0]);
+        }
+    });
+
+    removeFile.addEventListener('click', (e) => {
+        e.preventDefault();
+        fileInput.value = '';
+        fileChip.style.display = 'none';
+        submitBtn.disabled = true;
+    });
+
+    form.addEventListener('submit', () => {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Extracting your data...';
+    });
+</script>
+
+</body>
+</html>
